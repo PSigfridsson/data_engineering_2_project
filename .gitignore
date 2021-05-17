@@ -1,0 +1,7 @@
+#gitignore
+
+#Ignore private ssh key.
+*.pem
+
+#Ignore uppmax rc file.
+*.sh

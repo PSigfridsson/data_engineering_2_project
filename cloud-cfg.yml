@@ -15,5 +15,15 @@ runcmd:
   - 'sudo apt-get update'
   - 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io'
 
+  #Installation of pulsar
+  - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
+  - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
+  - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
+  - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/apache-pulsar-2.7.0'
+  - 'sudo pip3 install pulsar-client==2.7.1'
+
+  #Installation of java
+  - 'sudo apt install openjdk-11-jre-headless -y'
+
   #Reboot after all the updates
-  - 'sudo reboot'
+  #- 'sudo reboot'

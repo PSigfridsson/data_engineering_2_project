@@ -6,7 +6,8 @@ package_upgrade: true
 
 packages:
   - git
-
+  - python3-pip
+  
 runcmd:
   #Installation of docker
   - 'sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release'

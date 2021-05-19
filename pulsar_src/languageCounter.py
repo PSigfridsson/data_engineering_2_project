@@ -1,7 +1,11 @@
 from pulsar import Function
 
 class languageCounter(Function):
-	def process(self, context, input):
-		context.incr_counter(self, input, 1)
+	def __init__(self):
+		self.language_count_topic = "persistent://public/default/language_count"
 
-		return input
+	def process(self, input, context):
+		
+		context.incr_counter(self, input, 1)
+		lang_count = (input, context.get_counter(input))
+		context.publish(self.language_count_topic, lang_count)

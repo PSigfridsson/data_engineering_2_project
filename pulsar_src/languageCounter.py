@@ -11,5 +11,12 @@ class languageCounter(Function):
 
 	def process(self, input, context):
 		context.incr_counter(input, 1)
-		lang_count = (input, context.get_counter(input))
-		context.publish(self.language_count_topic, str(lang_count))
+		count = context.get_counter(input)
+		
+		client = pymongo.MongoClient("mongodb://localhost:27017/")
+		db = client["Github_statistics"]
+		col = db["language_count"]
+
+		key = {'language': input}
+		value = {'$set': {'count': count}}
+		col.update_one(key, value, upsert=True)

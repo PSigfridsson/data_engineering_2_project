@@ -10,7 +10,7 @@ from pulsar import ConsumerType
 # Create a pulsar client by supplying ip address and port
 client = pulsar.Client('pulsar://localhost:6650')
 # Subscribe to a topic and subscription
-consumer = client.subscribe('q1-topic', subscription_name='DE-sub', consumer_type=ConsumerType.Shared)
+consumer = client.subscribe('q1-topic', subscription_name='q1-sub', consumer_type=ConsumerType.Shared)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -27,16 +27,16 @@ def pulsarStatistics():
 	while not thread_stop_event.isSet():
 		msg = consumer.receive()
 		try:
-                    msg_str = msg.data().decode('utf-8')
-                    print("Received message : '%s'" % msg_str)
-                    #msg_tuple = msg.data().decode('utf-8')
-                    #msg_tuple = msg_tuple[1:]
-                    #msg_tuple = msg_tuple[:-1]
-                    #msg_tuple = tuple(msg_tuple.split(', '))
-                    socketio.emit('lang_count_list', {'msg': msg_str}, namespace='/test')
-                    #socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
-                    # Acknowledge for receiving the message
-                    consumer.acknowledge(msg)
+            msg_str = msg.data().decode('utf-8')
+            print("Received message : '%s'" % msg_str)
+            #msg_tuple = msg.data().decode('utf-8')
+            #msg_tuple = msg_tuple[1:]
+            #msg_tuple = msg_tuple[:-1]
+            #msg_tuple = tuple(msg_tuple.split(', '))
+            socketio.emit('lang_count_list', {'msg': msg_str}, namespace='/test')
+            #socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
+            # Acknowledge for receiving the message
+            consumer.acknowledge(msg)
 		except:
 			consumer.negative_acknowledge(msg)
 	# Destroy pulsar client

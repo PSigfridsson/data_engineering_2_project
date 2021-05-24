@@ -4,10 +4,11 @@ from pulsar import Function
 
 # Splitting initial repo data into Q1-Q4 topics
 
-class Topics_split(Function):
+class topics_split(Function):
     def __init__(self):
         self.q1_topic = "persistent://public/default/q1-topic"
         self.q3_topic = "persistent://public/default/q3-topic"
+
     def process(self, string, context):
         # splitting the input
         split_string = string.split(' ')

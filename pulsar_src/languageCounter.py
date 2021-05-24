@@ -1,5 +1,4 @@
 from pulsar import Function
-import pymongo
 
 '''
 
@@ -12,6 +11,5 @@ class languageCounter(Function):
 
 	def process(self, input, context):
 		context.incr_counter(input, 1)
-		count = context.get_counter(input)
-		lang_count = (input, count)
+		lang_count = (input, context.get_counter(input))
 		context.publish(self.language_count_topic, str(lang_count))

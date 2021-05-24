@@ -15,8 +15,8 @@ try:
 	msg_tuple = tuple(msg_tuple.split(', '))
 	print("Lang_count_tuple: ", msg_tuple)
 	
-	client = pymongo.MongoClient("mongodb://localhost:27017/")
-	db = client["Github_statistics"]
+	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+	db = mongoClient["Github_statistics"]
 	col = db["language_count"]
 
 	key = {'language': msg_tuple[0]}

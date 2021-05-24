@@ -27,16 +27,16 @@ def pulsarStatistics():
 	while not thread_stop_event.isSet():
 		msg = consumer.receive()
 		try:
-            msg_str = msg.data().decode('utf-8')
-            print("Received message : '%s'" % msg_str)
-            #msg_tuple = msg.data().decode('utf-8')
-            #msg_tuple = msg_tuple[1:]
-            #msg_tuple = msg_tuple[:-1]
-            #msg_tuple = tuple(msg_tuple.split(', '))
-            socketio.emit('lang_count_list', {'msg': msg_str}, namespace='/test')
-            #socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
-            # Acknowledge for receiving the message
-            consumer.acknowledge(msg)
+			msg_str = msg.data().decode('utf-8')
+			print("Received message : '%s'" % msg_str)
+			#msg_tuple = msg.data().decode('utf-8')
+			#msg_tuple = msg_tuple[1:]
+			#msg_tuple = msg_tuple[:-1]
+			#msg_tuple = tuple(msg_tuple.split(', '))
+			socketio.emit('lang_count_list', {'msg': msg_str}, namespace='/test')
+			#socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
+			# Acknowledge for receiving the message
+			consumer.acknowledge(msg)
 		except:
 			consumer.negative_acknowledge(msg)
 	# Destroy pulsar client
@@ -44,23 +44,23 @@ def pulsarStatistics():
 
 @app.route('/')
 def index():
-    #only by sending this page first will the client be connected to the socketio instance
-    return render_template('index.html')
+	#only by sending this page first will the client be connected to the socketio instance
+	return render_template('index.html')
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    # need visibility of the global thread object
-    global thread
-    print('Client connected')
+	# need visibility of the global thread object
+	global thread
+	print('Client connected')
 
-    if not thread.isAlive():
-        print("Starting Thread")
-        thread = socketio.start_background_task(pulsarStatistics)
+	if not thread.isAlive():
+		print("Starting Thread")
+		thread = socketio.start_background_task(pulsarStatistics)
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
-    print('Client disconnected')
+	print('Client disconnected')
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+	socketio.run(app)

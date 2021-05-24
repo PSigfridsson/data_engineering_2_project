@@ -14,8 +14,8 @@ $(document).ready(function(){
     });
 
     socket.on('lang_count_dict', function(msg) {
-        console.log("Received lang dict: " + msg.msg);
+        console.log("Received lang dict: " + msg.lang_count_dict;
 	
-	    $('#log').html(JSON.stringify(msg.msg));
+	    $('#log').html(JSON.stringify(msg.lang_count_dict));
     });
 });

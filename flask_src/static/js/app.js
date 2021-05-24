@@ -5,12 +5,12 @@ $(document).ready(function(){
 
     var language_count = {}
 
-    socket.on('language_count', function(msg)) {
+    socket.on('language_count', function(msg) {
         console.log("Received lang count: " + msg.language + " - " + msg.count);
         language_count[msg.language] = msg.count;
-        
+
         $('#log').html(language_count);
-    }
+    });
 
     //receive details from server
     socket.on('newnumber', function(msg) {

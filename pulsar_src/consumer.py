@@ -13,14 +13,15 @@ try:
 	msg_tuple = msg_tuple[1:]
 	msg_tuple = msg_tuple[:-1]
 	msg_tuple = tuple(msg_tuple.split(', '))
-	print("Lang_count_tuple: ", msg_tuple)
+	input_tuple = (msg_tuple[0][1:][:-1], msg_tuple[1])
+	print("Lang_count_tuple: ", input_tuple)
 	
 	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["language_count"]
 
-	key = {'language': msg_tuple[0]}
-	value = {'$set': {'count': msg_tuple[1]}}
+	key = {'language': input_tuple[0]}
+	value = {'$set': {'count': input_tuple[1]}}
 	col.update_one(key, value, upsert=True)
 	# Acknowledge for receiving the message
 	consumer.acknowledge(msg)

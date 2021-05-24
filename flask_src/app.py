@@ -41,7 +41,8 @@ def pulsarStatistics():
 		msg = consumer.receive()
 		try:
 			print("Received message : '%s'" % msg.data())
-			socketio.emit('language_count', {'language': msg.data()[0], 'count': msg.data()[1]}, namespace='/test')
+			msg_tuple = msg.data().decode('utf-8')
+			socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
 			# Acknowledge for receiving the message
 			consumer.acknowledge(msg)
 		except:

@@ -12,7 +12,7 @@ while True:
 		msg_tuple = msg_tuple[1:]
 		msg_tuple = msg_tuple[:-1]
 		msg_tuple = tuple(msg_tuple.split(', '))
-		print("Lang_count_tuple: " msg_tuple)
+		print("Lang_count_tuple: ", msg_tuple)
 		#socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
 		# Acknowledge for receiving the message
 		consumer.acknowledge(msg)

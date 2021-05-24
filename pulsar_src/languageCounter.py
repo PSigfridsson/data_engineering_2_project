@@ -1,5 +1,5 @@
 from pulsar import Function
-
+import pymongo
 '''
 
 sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/DEtopic --tenant public --namespace default

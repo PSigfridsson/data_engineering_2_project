@@ -12,5 +12,10 @@ $(document).ready(function(){
 
         $('#log').html(JSON.stringify(language_count));
     });
-
+    socket.on('lang_count_list', function(msg) {
+	console.log("Received lang count: " + msg.msg);
+	
+	$('#log').html(JSON.stringify(msg.msg));
+	
+    });
 });

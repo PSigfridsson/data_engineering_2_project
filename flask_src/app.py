@@ -23,17 +23,25 @@ socketio = SocketIO(app, async_mode=None, logger=True, engineio_logger=True)
 thread = Thread()
 thread_stop_event = Event()
 
+language_count = {}
+
 def pulsarStatistics():
 	while not thread_stop_event.isSet():
 		msg = consumer.receive()
 		try:
 			msg_str = msg.data().decode('utf-8')
 			print("Received message : '%s'" % msg_str)
+
+			if msg_str not in list(language_count.keys()):
+			    language_count[msg_str] = 1
+			else:
+			    language_count[msg_str] += 1
+
 			#msg_tuple = msg.data().decode('utf-8')
 			#msg_tuple = msg_tuple[1:]
 			#msg_tuple = msg_tuple[:-1]
 			#msg_tuple = tuple(msg_tuple.split(', '))
-			socketio.emit('lang_count_list', {'msg': msg_str}, namespace='/test')
+			socketio.emit('lang_count_dict', {'lang_count_dict': language_count}, namespace='/test')
 			#socketio.emit('language_count', {'language': msg_tuple[0], 'count': msg_tuple[1]}, namespace='/test')
 			# Acknowledge for receiving the message
 			consumer.acknowledge(msg)

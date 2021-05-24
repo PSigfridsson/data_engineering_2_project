@@ -37,14 +37,14 @@ def randomNumberGenerator():
 
 def pulsarStatistics():
 	while not thread_stop_event.isSet():
-		while msg = consumer.receive():
-			try:
-				print("Received message : '%s'" % msg.data())
-				socketio.emit('language_count', {'language': msg.data()[0], 'count': msg.data()[1]}, namespace='/test')
-				# Acknowledge for receiving the message
-				consumer.acknowledge(msg)
-			except:
-				consumer.negative_acknowledge(msg)
+		msg = consumer.receive():
+		try:
+			print("Received message : '%s'" % msg.data())
+			socketio.emit('language_count', {'language': msg.data()[0], 'count': msg.data()[1]}, namespace='/test')
+			# Acknowledge for receiving the message
+			consumer.acknowledge(msg)
+		except:
+			consumer.negative_acknowledge(msg)
 	# Destroy pulsar client
 	client.close()
 

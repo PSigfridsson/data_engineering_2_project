@@ -6,6 +6,7 @@ from threading import Thread, Event
 
 
 import pulsar
+from pulsar import ConsumerType
 # Create a pulsar client by supplying ip address and port
 client = pulsar.Client('pulsar://localhost:6650')
 # Subscribe to a topic and subscription

@@ -1,11 +1,14 @@
-from flask import Flask, render_template, url_for, copy_current_request_context
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    #only by sending this page first will the client be connected to the socketio instance
     return render_template('index.html')
+
+@app.route('/_top10lang')
+def top10lang():
+	return jsonify({'top10': [('Python', 1), ('Java', 2)]})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -21,7 +21,7 @@ try:
 	col = db["language_count"]
 
 	key = {'language': input_tuple[0]}
-	value = {'$set': {'count': input_tuple[1]}}
+	value = {'$set': {'count': int(input_tuple[1])}}
 	col.update_one(key, value, upsert=True)
 	# Acknowledge for receiving the message
 	consumer.acknowledge(msg)

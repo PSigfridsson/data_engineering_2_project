@@ -14,9 +14,9 @@ def top10lang():
 	col = db["language_count"]
 
 	result = []
-	for x in col.aggregate([{'$sort': {'count': 1}}, {'$limit': 10}]):
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': 10}]):
 		result.append((x['language'], x['count']))
-		
+
 	return jsonify({'top10': result})
 
 if __name__ == '__main__':

@@ -14,15 +14,15 @@ $(document).ready(function(){
     });
 
     $("#top10unittestbutton").click(function() {
-      topxLanguages(10);
+      topxUnitTests(10);
     });
 
     $("#top15unittestbutton").click(function() {
-      topxLanguages(15);
+      topxUnitTests(15);
     });
 
     $("#top25unittestbutton").click(function() {
-      topxLanguages(25);
+      topxUnitTests(25);
     });
 
 });

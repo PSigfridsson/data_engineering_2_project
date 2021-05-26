@@ -5,11 +5,11 @@ $(document).ready(function(){
       topxLanguages(10);
     });
 
-    $("#top10langbutton").click(function() {
+    $("#top15langbutton").click(function() {
       topxLanguages(15);
     });
 
-    $("#top10langbutton").click(function() {
+    $("#top25langbutton").click(function() {
       topxLanguages(25);
     });
 

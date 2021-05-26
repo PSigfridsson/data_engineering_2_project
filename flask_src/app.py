@@ -16,7 +16,7 @@ def topxlang():
 	col = db["language_count"]
 
 	result = []
-	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': topx}]):
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['language'], x['count']))
 
 	return jsonify({'top10': result})
@@ -24,13 +24,13 @@ def topxlang():
 @app.route('/_topxunittest')
 def topxunittest():
 	topx = request.args.get('topx')
-	
+
 	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["unit_test_count"]
 
 	result = []
-	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': topx}]):
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['language'], x['count']))
 
 	return jsonify({'top10': result})

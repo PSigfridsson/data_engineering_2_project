@@ -15,16 +15,26 @@ runcmd:
   - 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
   - 'sudo apt-get update'
   - 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io'
+  - 'sudo apt install -y docker-compose'
 
   #Installation of pulsar
   - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
   - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
   - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
-  - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/apache-pulsar-2.7.0'
+  - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/pulsar'
   - 'sudo pip3 install pulsar-client==2.7.1'
-  # Run pular - sudo docker run -it -p 6650:6650  -p 8080:8080  --mount source=pulsardata,target=/data  --mount source=pulsarconf,target=/conf  apachepulsar/pulsar:2.7.2  bin/pulsar standalone
+  
   #Installation of java
   - 'sudo apt install openjdk-11-jre-headless -y'
+
+  # Running pulsar
+  - 'sudo docker run -p 6650:6650  -p 8080:8080  --mount source=pulsardata,target=/home/ubuntu/pulsar/data  --mount source=pulsarconf,target=/home/ubuntu/pulsar/conf  apachepulsar/pulsar:2.7.2  home/ubuntu/pulsar/bin/pulsar standalone'
+
+  # Cloning our gitrepo
+  - 'git clone https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
+
+  # Mongo docker
+  - ''
 
   #Reboot after all the updates
   #- 'sudo reboot'

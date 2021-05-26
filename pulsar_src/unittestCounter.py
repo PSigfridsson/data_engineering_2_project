@@ -18,6 +18,7 @@ class unittestCounter(Function):
         files = requests.get('{}'.format(input_split[1] + '/contents'), auth=(username, token))
         for j in range(len(files.json())):
             if 'test' in files.json()[j]['name']:
-                context.incr_counter(input_split[0], 1)
-                unit_count = (input_split[0], context.get_counter(input_split[0]))
+            	key = "unittest_"+input_split[0]
+                context.incr_counter(key, 1)
+                unit_count = (input_split[0], context.get_counter(key))
                 context.publish(self.unittest, str(unit_count))

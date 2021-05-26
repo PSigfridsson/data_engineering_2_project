@@ -18,7 +18,7 @@ while True:
 
 		mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 		db = mongoClient["Github_statistics"]
-		col = db["language_count"]
+		col = db["unit_test_count"]
 
 		key = {'language': input_tuple[0]}
 		value = {'$set': {'count': input_tuple[1]}}

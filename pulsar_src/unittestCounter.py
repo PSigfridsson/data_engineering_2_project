@@ -3,7 +3,7 @@ import requests
 import json
 
 '''
-sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-input --tenant public --namespace default
+sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default
 
 '''
 class unittestCounter(Function):
@@ -18,7 +18,7 @@ class unittestCounter(Function):
         files = requests.get('{}'.format(input_split[1] + '/contents'), auth=(username, token))
         for j in range(len(files.json())):
             if 'test' in files.json()[j]['name']:
-            	key = "unittest_"+input_split[0]
+            	key = b"unittest_"+input_split[0]
                 context.incr_counter(key, 1)
                 unit_count = (input_split[0], context.get_counter(key))
                 context.publish(self.unittest, str(unit_count))

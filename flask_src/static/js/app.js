@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 
 function topxLanguages(x) {
-    $.getJSON("/_topxlang"+"?topx="+toString(x), function(data) {
+    $.getJSON("/_topxlang"+"?topx="+x, function(data) {
         console.log(data.top10);
         $.each(data.top10, function(key,val) {
             console.log("Val0: "+val[0]+" - Val1: "+val[1]);
@@ -19,7 +19,7 @@ function topxLanguages(x) {
 }
 
 function topxUnitTests(x) {
-    $.getJSON("/_topxunittest"+"?topx="+toString(x), function(data) {
+    $.getJSON("/_topxunittest"+"?topx="+x, function(data) {
         console.log(data.top10);
         $.each(data.top10, function(key,val) {
             console.log("Val0: "+val[0]+" - Val1: "+val[1]);

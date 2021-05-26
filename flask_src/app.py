@@ -11,7 +11,7 @@ def index():
 def topxlang():
 	topx = request.args.get('topx')
 
-	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["language_count"]
 
@@ -25,7 +25,7 @@ def topxlang():
 def topxunittest():
 	topx = request.args.get('topx')
 
-	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["unit_test_count"]
 

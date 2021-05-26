@@ -7,26 +7,30 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/_top10lang')
-def top10lang():
+@app.route('/_topxlang')
+def topxlang():
+	topx = request.args.get('topx')
+
 	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["language_count"]
 
 	result = []
-	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': 10}]):
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': topx}]):
 		result.append((x['language'], x['count']))
 
 	return jsonify({'top10': result})
 
-@app.route('/_top10unittest')
-def top10unittest():
+@app.route('/_topxunittest')
+def topxunittest():
+	topx = request.args.get('topx')
+	
 	mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["unit_test_count"]
 
 	result = []
-	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': 10}]):
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': topx}]):
 		result.append((x['language'], x['count']))
 
 	return jsonify({'top10': result})

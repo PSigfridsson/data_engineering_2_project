@@ -15,4 +15,4 @@ class topicSplit(Function):
         # splitting the input
         split_string = string.split(' ')
         context.publish(self.q1_topic, split_string[1])
-        #context.publish(self.q3_topic, '{} {}'.format(split_string[1], split_string[2]))
+        context.publish(self.q3_topic, '{} {}'.format(split_string[1], split_string[2]))

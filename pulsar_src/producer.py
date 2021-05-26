@@ -4,7 +4,7 @@ import os
 import json
 
 username = 'psigfridsson'
-token = os.environ.get("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")
+token = "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"
 
 client = pulsar.Client('pulsar://localhost:6650')
 producer = client.create_producer('Maintopic')

@@ -19,3 +19,10 @@ services:
     restart: always
     ports:
       - 5000:5000
+
+  pulsar:
+    build: pulsar_src/
+    restart: always
+    ports:
+      - 6650:6650
+      - 8080:8080

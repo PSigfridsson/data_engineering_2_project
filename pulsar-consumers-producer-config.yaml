@@ -30,4 +30,3 @@ services:
     build:
       context: pulsar_src/
       dockerfile: producer.Dockerfile
-    restart: always

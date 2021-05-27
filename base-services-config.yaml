@@ -21,7 +21,7 @@ services:
       - 5000:5000
 
   pulsar:
-    build: pulsar_src/
+    build: pulsar_src/pulsar_functions/
     restart: always
     ports:
       - 6650:6650

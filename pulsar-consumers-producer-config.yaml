@@ -2,27 +2,32 @@ version: '3.1'
 
 services:
 
-  consumerQ1:
+  consumerq1:
     build:
-      - dockerfile: pulsar_src/consumerQ1.Dockerfile
+      context: pulsar_src/
+      dockerfile: consumerQ1.Dockerfile
     restart: always
 
-  # consumerQ2:
+  # consumerq2:
   #   build:
-  #     - dockerfile: pulsar_src/consumerQ2.Dockerfile
+  #     context: pulsar_src/
+  #     dockerfile: consumerQ2.Dockerfile
   #   restart: always
 
-  consumerQ3:
+  consumerq3:
     build:
-      - dockerfile: pulsar_src/consumerQ3.Dockerfile
+      context: pulsar_src/
+      dockerfile: consumerQ3.Dockerfile
     restart: always
 
-  # consumerQ4:
+  # consumerq4:
   #   build:
-  #     - dockerfile: pulsar_src/consumerQ4.Dockerfile
+  #     context: pulsar_src/
+  #     dockerfile: pulsar_src/consumerQ4.Dockerfile
   #   restart: always
 
   producer:
     build:
-      - dockerfile: pulsar_src/producer.Dockerfile
+      context: pulsar_src/
+      dockerfile: producer.Dockerfile
     restart: always

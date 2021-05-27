@@ -31,7 +31,7 @@ runcmd:
   - 'git clone https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
 
   # docker-compose start base services - mongo, mongo-express, flask, pulsar
-  - 'sudo docker-compose -f system-config.yaml up -d'
+  - 'sudo docker-compose -f base-services-config.yaml up -d'
 
   # Adding the pulsar functions to apache pulsar
   - 'sleep 60' # Just to make sure apache pulsar is 'alive'.

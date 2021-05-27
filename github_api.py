@@ -45,8 +45,10 @@ def main():
 				print('Sleep for 60s')
 				time.sleep(60)
 				i+=1
-
+				
+		print(start)
 		start += delta
+
 
 
 def get_random_token(i):

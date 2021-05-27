@@ -18,23 +18,28 @@ runcmd:
   - 'sudo apt install -y docker-compose'
 
   #Installation of pulsar
-  - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
-  - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
-  - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
-  - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/pulsar'
-  - 'sudo pip3 install pulsar-client==2.7.1'
+  # - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/pulsar'
+  # - 'sudo pip3 install pulsar-client==2.7.1'
   
   #Installation of java
-  - 'sudo apt install openjdk-11-jre-headless -y'
-
-  # Running pulsar
-  - 'sudo docker run -p 6650:6650  -p 8080:8080  --mount source=pulsardata,target=/home/ubuntu/pulsar/data  --mount source=pulsarconf,target=/home/ubuntu/pulsar/conf  apachepulsar/pulsar:2.7.2  home/ubuntu/pulsar/bin/pulsar standalone'
+  #- 'sudo apt install openjdk-11-jre-headless -y'
 
   # Cloning our gitrepo
   - 'git clone https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
 
-  # Mongo docker
-  - ''
+  # docker-compose start base services - mongo, mongo-express, flask, pulsar
+  - 'sudo docker-compose -f system-config.yaml up -d'
+
+  # Adding the pulsar functions to apache pulsar
+  - 'sleep 60' # Just to make sure apache pulsar is 'alive'.
+  - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default'
+  - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default'
+  - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default'
+  
+  # 
 
   #Reboot after all the updates
   #- 'sudo reboot'

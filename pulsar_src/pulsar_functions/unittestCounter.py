@@ -5,6 +5,9 @@ import json
 '''
 sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default
 
+Inside docker container:
+bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default
+
 '''
 class unittestCounter(Function):
     def __init__(self):

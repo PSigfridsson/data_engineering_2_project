@@ -5,6 +5,9 @@ Splitting initial repo data into Q1-Q4 topics
 
 sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default
 
+Inside docker container:
+bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default
+
 '''
 class topicSplit(Function):
     def __init__(self):

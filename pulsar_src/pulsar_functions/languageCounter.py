@@ -4,6 +4,9 @@ from pulsar import Function
 
 sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default
 
+Inside docker container:
+bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default
+
 '''
 class languageCounter(Function):
 	def __init__(self):

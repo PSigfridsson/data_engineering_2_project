@@ -3,7 +3,7 @@ from pulsar import ConsumerType
 # Create a pulsar client by supplying ip address and port
 client = pulsar.Client('pulsar://localhost:6650')
 # Subscribe to a topic and subscription
-consumer = client.subscribe('q3-output', subscription_name='DE-sub', consumer_type=ConsumerType.Shared)
+consumer = client.subscribe('q3-output', subscription_name='DE-sub')
 
 unittest_count = {}
 

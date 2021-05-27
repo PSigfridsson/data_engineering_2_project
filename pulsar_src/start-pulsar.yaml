@@ -1,0 +1,19 @@
+#sudo docker run -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data apachepulsar/pulsar:2.7.0 bin/pulsar standalone
+
+version: '3.1'
+
+services:
+
+  pulsar:
+    build: Dockerfile
+    ports:
+      - 6650:6650
+      - 8080:8080
+    entrypoint: bin/pulsar standalone
+
+  pulsar_setup_functions:
+    image: apachepulsar/pulsar:2.7.0
+    restart: "no"
+    depends_on:
+      - pulsar
+    entrypoint: bash -c 'sleep 20 && echo "done yet?"'

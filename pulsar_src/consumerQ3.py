@@ -2,7 +2,7 @@ import pulsar
 from pulsar import ConsumerType
 import pymongo
 
-client = pulsar.Client('pulsar://mongo:6650')
+client = pulsar.Client('pulsar://pulsar:6650')
 consumer = client.subscribe('q3-output', subscription_name='DE-sub', consumer_type=ConsumerType.Shared)
 
 while True:

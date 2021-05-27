@@ -1,7 +1,7 @@
 import pulsar
 import pymongo
 # Create a pulsar client by supplying ip address and port
-client = pulsar.Client('pulsar://mongo:6650')
+client = pulsar.Client('pulsar://pulsar:6650')
 # Subscribe to a topic and subscription
 consumer = client.subscribe('language_count', subscription_name='lang_count_sub')
 

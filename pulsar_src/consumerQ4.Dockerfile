@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:latest
+FROM python:3.8-buster
 COPY consumerQ4.py .
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt

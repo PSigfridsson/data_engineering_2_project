@@ -6,7 +6,7 @@ import json
 username = 'psigfridsson'
 token = "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"
 
-client = pulsar.Client('pulsar://localhost:6650')
+client = pulsar.Client('pulsar://mongo:6650')
 producer = client.create_producer('Maintopic')
 
 repo = requests.get('https://api.github.com/search/repositories?q=pushed:"2021-05-14"&per_page=100', auth=(username, token))

@@ -1,7 +1,7 @@
 import pulsar
 import pymongo
 # Create a pulsar client by supplying ip address and port
-client = pulsar.Client('pulsar://localhost:6650')
+client = pulsar.Client('pulsar://mongo:6650')
 # Subscribe to a topic and subscription
 consumer = client.subscribe('language_count', subscription_name='lang_count_sub')
 
@@ -17,7 +17,7 @@ while True:
 		input_tuple = (msg_tuple[0][1:][:-1], msg_tuple[1])
 		print("Lang_count_tuple: ", input_tuple)
 		
-		mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
+		mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
 		db = mongoClient["Github_statistics"]
 		col = db["language_count"]
 

@@ -17,16 +17,6 @@ runcmd:
   - 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io'
   - 'sudo apt install -y docker-compose'
 
-  #Installation of pulsar
-  # - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
-  # - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
-  # - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
-  # - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/pulsar'
-  # - 'sudo pip3 install pulsar-client==2.7.1'
-  
-  #Installation of java
-  #- 'sudo apt install openjdk-11-jre-headless -y'
-
   # Cloning our gitrepo
   - 'sudo git clone -b dev https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
 
@@ -35,12 +25,19 @@ runcmd:
 
   # Adding the pulsar functions to apache pulsar
   - 'sleep 120' # Just to make sure apache pulsar is configured and running.
-  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default'
-  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default'
-  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestciSplit.py --classname unittestciSplit.unittestciSplit --inputs persistent://public/default/q3-q4-topic --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-output --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestciCounter.py --classname unittestciCounter.unittestciCounter --inputs persistent://public/default/q4-output --tenant public --namespace default'
+  - 'sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py commitsCounter.py --classname commitsCounter.commitsCounter --inputs persistent://public/default/q2-topic --tenant public --namespace default'
   
   # Start producer and consumers
   - 'sudo docker-compose -f data_engineering_2_project/pulsar-consumers-producer-config.yaml up -d'
 
-  #Reboot after all the updates
-  #- 'sudo reboot'
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestciSplit.py --classname unittestciSplit.unittestciSplit --inputs persistent://public/default/q3-q4-topic --tenant public --namespace default
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-output --tenant public --namespace default
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestciCounter.py --classname unittestciCounter.unittestciCounter --inputs persistent://public/default/q4-output --tenant public --namespace default
+#sudo docker exec -i data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py commitsCounter.py --classname commitsCounter.commitsCounter --inputs persistent://public/default/q2-topic --tenant public --namespace default

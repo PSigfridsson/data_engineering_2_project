@@ -41,7 +41,7 @@ from keystoneauth1 import loading
 from keystoneauth1 import session
 
 server_name = "project_group_13_vm"+str(random.randint(1000,9999))
-flavor = "ssc.medium" 
+flavor = "ssc.large" 
 private_net = "UPPMAX 2020/1-3 Internal IPv4 Network"
 floating_ip_pool_name = None
 floating_ip = None

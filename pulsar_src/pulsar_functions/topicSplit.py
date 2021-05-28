@@ -12,10 +12,12 @@ bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topi
 class topicSplit(Function):
     def __init__(self):
         self.q1_topic = "persistent://public/default/q1-topic"
-        self.q3_topic = "persistent://public/default/q3-topic"
+        self.q2_topic = "persistent://public/default/q2-topic"
+        self.q3_q4_topic = "persistent://public/default/q3-q4-topic"
 
     def process(self, string, context):
         # splitting the input
         split_string = string.split(' ')
         context.publish(self.q1_topic, split_string[1])
-        context.publish(self.q3_topic, '{} {}'.format(split_string[1], split_string[2]))
+        context.publish(self.q2_topic, '{} {}'.format(split_string[0], split_string[2]))
+        context.publish(self.q3_q4_topic, '{} {}'.format(split_string[1], split_string[2]))

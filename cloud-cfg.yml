@@ -6,7 +6,8 @@ package_upgrade: true
 
 packages:
   - git
-
+  - python3-pip
+  
 runcmd:
   #Installation of docker
   - 'sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release'
@@ -14,6 +15,32 @@ runcmd:
   - 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
   - 'sudo apt-get update'
   - 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io'
+  - 'sudo apt install -y docker-compose'
+
+  #Installation of pulsar
+  # - 'sudo wget https://archive.apache.org/dist/pulsar/pulsar-2.7.0/apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'sudo tar xvfz apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'rm -rf apache-pulsar-2.7.0-bin.tar.gz'
+  # - 'sudo mv apache-pulsar-2.7.0/ home/ubuntu/pulsar'
+  # - 'sudo pip3 install pulsar-client==2.7.1'
+  
+  #Installation of java
+  #- 'sudo apt install openjdk-11-jre-headless -y'
+
+  # Cloning our gitrepo
+  - 'sudo git clone -b dev https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
+
+  # docker-compose start base services - mongo, mongo-express, flask, pulsar
+  - 'sudo docker-compose -f data_engineering_2_project/base-services-config.yaml up -d'
+
+  # Adding the pulsar functions to apache pulsar
+  - 'sleep 120' # Just to make sure apache pulsar is configured and running.
+  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default'
+  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default'
+  - 'sudo docker exec data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default'
+  
+  # Start producer and consumers
+  - 'sudo docker-compose -f data_engineering_2_project/pulsar-consumers-producer-config.yaml up -d'
 
   #Reboot after all the updates
-  - 'sudo reboot'
+  #- 'sudo reboot'

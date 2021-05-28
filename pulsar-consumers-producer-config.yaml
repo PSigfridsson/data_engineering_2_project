@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  consumerq1:
+    build: pulsar_src/
+    restart: always
+    entrypoint: ["python3", "consumerQ1.py"]
+
+  # consumerq2:
+  #   build:
+  #     context: pulsar_src/
+  #     dockerfile: consumerQ2.Dockerfile
+  #   restart: always
+
+  consumerq3:
+    build: pulsar_src/
+    restart: always
+    entrypoint: ["python3", "consumerQ3.py"]
+
+  # consumerq4:
+  #   build:
+  #     context: pulsar_src/
+  #     dockerfile: pulsar_src/consumerQ4.Dockerfile
+  #   restart: always
+
+  producer:
+    build: pulsar_src/
+    entrypoint: ["python3", "producer.py"]

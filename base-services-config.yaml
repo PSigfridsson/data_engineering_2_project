@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+
+  flask:
+    build: flask_src/
+    restart: always
+    ports:
+      - 5000:5000
+
+  pulsar:
+    build: pulsar_src/pulsar_functions/
+    restart: always
+    ports:
+      - 6650:6650
+      - 8080:8080
+    entrypoint: ["bin/pulsar", "standalone"]

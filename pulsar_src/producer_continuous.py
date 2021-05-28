@@ -11,8 +11,8 @@ def main():
 
 	i = 0
 	username, token, _ = get_next_token(i)
-	start = datetime.datetime.strptime("2020-01-01", "%Y-%m-%d")
-	end = datetime.datetime.strptime("2020-01-24", "%Y-%m-%d")
+	start = datetime.datetime.strptime("2020-05-27", "%Y-%m-%d")
+	end = datetime.datetime.strptime("2021-05-27", "%Y-%m-%d")
 	delta = timedelta(days=1)
 
 	while start <= end:

@@ -55,7 +55,7 @@ def topxunittestci():
 
 	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
 	db = mongoClient["Github_statistics"]
-	col = db["unit_test_ci_count"]
+	col = db["unit_test_and_ci_count"]
 
 	result = []
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):

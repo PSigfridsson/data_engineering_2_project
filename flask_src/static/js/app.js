@@ -37,7 +37,8 @@ $(document).ready(function(){
 
     $("#top25unittestbutton").click(function() {
       topxUnitTests(25);
-
+    });
+    
     // Top languages with unittests and CI
     $("#top10testcibutton").click(function() {
       topxUnitTestsCi(10);

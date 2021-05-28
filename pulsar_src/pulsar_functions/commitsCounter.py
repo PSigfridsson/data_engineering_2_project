@@ -13,7 +13,7 @@ class commitsCounter(Function):
         token = tokens[username]
         input_split = input.split(' ')
         try:
-            commits = re.search('\d+$', requests.get('{}'.format(input_split[1] + '/commits?per_page=1'), auth=(username, token)).links['last']['url']).group()
+            commits = int(re.search('\d+$', requests.get('{}'.format(input_split[1] + '/commits?per_page=1'), auth=(username, token)).links['last']['url']).group())
         except:
             commits = 0
 

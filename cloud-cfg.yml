@@ -34,7 +34,7 @@ runcmd:
   - 'sudo docker-compose -f data_engineering_2_project/base-services-config.yaml up -d'
 
   # Adding the pulsar functions to apache pulsar
-  - 'sleep 60' # Just to make sure apache pulsar is configured and running.
+  - 'sleep 120' # Just to make sure apache pulsar is configured and running.
   - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default'
   - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py topicSplit.py --classname topicSplit.topicSplit --inputs persistent://public/default/Maintopic --tenant public --namespace default'
   - 'sudo docker exec -it data_engineering_2_project_pulsar_1 bin/pulsar-admin functions create --py languageCounter.py --classname languageCounter.languageCounter --inputs persistent://public/default/q1-topic --tenant public --namespace default'

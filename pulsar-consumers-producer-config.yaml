@@ -3,9 +3,7 @@ version: '3.1'
 services:
 
   consumerq1:
-    build:
-      context: pulsar_src/
-      dockerfile: consumerQ1.Dockerfile
+    build: pulsar_src/
     restart: always
 
   # consumerq2:
@@ -15,9 +13,7 @@ services:
   #   restart: always
 
   consumerq3:
-    build:
-      context: pulsar_src/
-      dockerfile: consumerQ3.Dockerfile
+    build: pulsar_src/
     restart: always
 
   # consumerq4:
@@ -27,6 +23,4 @@ services:
   #   restart: always
 
   producer:
-    build:
-      context: pulsar_src/
-      dockerfile: producer.Dockerfile
+    build: pulsar_src/

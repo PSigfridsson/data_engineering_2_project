@@ -28,7 +28,7 @@ runcmd:
   #- 'sudo apt install openjdk-11-jre-headless -y'
 
   # Cloning our gitrepo
-  - 'git clone -b dev https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
+  - 'sudo git clone -b dev https://psigfridsson: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@github.com/PSigfridsson/data_engineering_2_project.git'
 
   # docker-compose start base services - mongo, mongo-express, flask, pulsar
   - 'sudo docker-compose -f data_engineering_2_project/base-services-config.yaml up -d'

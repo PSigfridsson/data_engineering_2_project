@@ -24,4 +24,4 @@ services:
 
   producer:
     build: pulsar_src/
-    entrypoint: ["python3", "producer.py"]
+    entrypoint: ["python3", "producer_continuous.py"]

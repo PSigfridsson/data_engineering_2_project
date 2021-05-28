@@ -13,13 +13,16 @@ class unittestciSplit(Function):
         username = random.choice(list(tokens))
         token = tokens[username]
         input_split = input.split(' ')
-        files = requests.get(input_split[1] + '/contents', auth=(username, token))
         test_files = []
-        for j in range(len(files.json())):
-            try:
-                test_files.append(files.json()[j]['name'].lower())
-            except:
-                pass
+        try:
+            files = requests.get(input_split[1] + '/contents', auth=(username, token))
+            for j in range(len(files.json())):
+                try:
+                    test_files.append(files.json()[j]['name'].lower())
+                except:
+                    pass
+        except:
+            pass
             
         if ('test' in test_files) or ('tests' in test_files):
             context.publish(self.unittests, '{}'.format(input_split[0]))

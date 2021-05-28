@@ -6,6 +6,8 @@ two proper ways to run this analytic streaming project and a manual way. Either 
 
 **Note:** to access the flask website and the mongo-express UI, port 5000 respectivly port 8081 needs to be portforwarded when using SSH.
 
+**Note:** the two docker-compose commands can sometimes fail becouse some python library could not be found. Just try to rerun the docker-compose command in this case. Or if you have started the a VM using cloud-init and provied the _cloud-cfg.yaml_ as config file you can write this command to restart the VM and try to run the cloud-init file again: cloud-init clean --logs --reboot
+
 ### Start a SNIC VM by python script
 The start_instances.py script, located at the root folder, starts a VM on SNIC. To use this correctly you would need to change the key of the VM (line 83) and you need to download a OpenStack RC file (v3) to get the API Access to the OpenStack. This file needs to be sourced before calling the start_instances.py. After these steps you can run the start_instances.py script to start a VM that automatically gets contextualized and lanches all the needed docker services for the system.
 ### Providing the cloud-init file at SNIC VM launch

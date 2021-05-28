@@ -21,6 +21,20 @@ def topxlang():
 
 	return jsonify({'top10': result})
 
+@app.route('/_topxcommits')
+def topxcommits():
+	topx = request.args.get('topx')
+
+	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
+	db = mongoClient["Github_statistics"]
+	col = db["repo_commit_count"]
+
+	result = []
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
+		result.append((x['repo'], x['count']))
+
+	return jsonify({'top10': result})
+
 @app.route('/_topxunittest')
 def topxunittest():
 	topx = request.args.get('topx')
@@ -28,6 +42,20 @@ def topxunittest():
 	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
 	db = mongoClient["Github_statistics"]
 	col = db["unit_test_count"]
+
+	result = []
+	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
+		result.append((x['language'], x['count']))
+
+	return jsonify({'top10': result})
+
+@app.route('/_topxunittestci')
+def topxunittestci():
+	topx = request.args.get('topx')
+
+	mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
+	db = mongoClient["Github_statistics"]
+	col = db["unit_test_ci_count"]
 
 	result = []
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):

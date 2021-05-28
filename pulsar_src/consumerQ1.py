@@ -1,11 +1,10 @@
 import pulsar
+from pulsar import ConsumerType
 import pymongo
-# Create a pulsar client by supplying ip address and port
-client = pulsar.Client('pulsar://pulsar:6650')
-# Subscribe to a topic and subscription
-consumer = client.subscribe('language_count', subscription_name='lang_count_sub')
 
-# Display message received from producer
+client = pulsar.Client('pulsar://pulsar:6650')
+consumer = client.subscribe('language_count', subscription_name='q1-sub', consumer_type=ConsumerType.Shared)
+
 while True:
 	msg = consumer.receive()
 	try:

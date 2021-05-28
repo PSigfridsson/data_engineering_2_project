@@ -7,22 +7,20 @@ services:
     restart: always
     entrypoint: ["python3", "consumerQ1.py"]
 
-  # consumerq2:
-  #   build:
-  #     context: pulsar_src/
-  #     dockerfile: consumerQ2.Dockerfile
-  #   restart: always
+  consumerq2:
+    build: pulsar_src/
+    restart: always
+    entrypoint: ["python3", "consumerQ2.py"]
 
   consumerq3:
     build: pulsar_src/
     restart: always
     entrypoint: ["python3", "consumerQ3.py"]
 
-  # consumerq4:
-  #   build:
-  #     context: pulsar_src/
-  #     dockerfile: pulsar_src/consumerQ4.Dockerfile
-  #   restart: always
+  consumerq4:
+    build: pulsar_src/
+    restart: always
+    entrypoint: ["python3", "consumerQ4.py"]
 
   producer:
     build: pulsar_src/

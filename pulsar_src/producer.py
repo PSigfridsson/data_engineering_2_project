@@ -14,6 +14,5 @@ for i in range(len(repo.json()['items'])):
     # Send a message to consumer
     producer.send('{} {} {}'.format(repo.json()['items'][i]['full_name'], repo.json()['items'][i]['language'], repo.json()['items'][i]['url']).encode('utf-8'))
 
-#producer.send('Python'.encode('utf-8'))
 # Destroy pulsar
 client.close()

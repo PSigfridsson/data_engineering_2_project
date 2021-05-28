@@ -19,6 +19,7 @@ def topxlang():
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['language'], x['count']))
 
+	mongoClient.close()
 	return jsonify({'top10': result})
 
 @app.route('/_topxcommits')
@@ -33,6 +34,7 @@ def topxcommits():
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['repo'], x['count']))
 
+	mongoClient.close()
 	return jsonify({'top10': result})
 
 @app.route('/_topxunittest')
@@ -47,6 +49,7 @@ def topxunittest():
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['language'], x['count']))
 
+	mongoClient.close()
 	return jsonify({'top10': result})
 
 @app.route('/_topxunittestci')
@@ -61,6 +64,7 @@ def topxunittestci():
 	for x in col.aggregate([{'$sort': {'count': -1}}, {'$limit': int(topx)}]):
 		result.append((x['language'], x['count']))
 
+	mongoClient.close()
 	return jsonify({'top10': result})
 
 if __name__ == '__main__':

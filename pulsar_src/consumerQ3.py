@@ -5,6 +5,10 @@ import pymongo
 client = pulsar.Client('pulsar://pulsar:6650')
 consumer = client.subscribe('unit_test_count', subscription_name='q3-sub', consumer_type=ConsumerType.Shared)
 
+mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
+db = mongoClient["Github_statistics"]
+col = db["unit_test_count"]
+
 while True:
 	msg = consumer.receive()
 	try:
@@ -15,10 +19,6 @@ while True:
 		msg_tuple = tuple(msg_tuple.split(', '))
 		input_tuple = (msg_tuple[0][1:][:-1], int(msg_tuple[1]))
 		print("unit_count_tuple: ", input_tuple)
-
-		mongoClient = pymongo.MongoClient("mongodb://mongo:27017/")
-		db = mongoClient["Github_statistics"]
-		col = db["unit_test_count"]
 
 		key = {'language': input_tuple[0]}
 		value = {'$set': {'count': input_tuple[1]}}

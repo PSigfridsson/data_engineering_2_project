@@ -1,6 +1,4 @@
 from pulsar import Function
-import requests
-import json
 
 '''
 sudo bin/pulsar-admin functions create --py ~/data_engineering_2_project/pulsar_src/unittestCounter.py --classname unittestCounter.unittestCounter --inputs persistent://public/default/q3-topic --tenant public --namespace default

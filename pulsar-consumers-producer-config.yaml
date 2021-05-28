@@ -5,7 +5,7 @@ services:
   consumerq1:
     build: pulsar_src/
     restart: always
-    entrypoint: ["python3", "consumerq1.py"]
+    entrypoint: ["python3", "consumerQ1.py"]
 
   # consumerq2:
   #   build:
@@ -16,7 +16,7 @@ services:
   consumerq3:
     build: pulsar_src/
     restart: always
-    entrypoint: ["python3", "consumerq3.py"]
+    entrypoint: ["python3", "consumerQ3.py"]
 
   # consumerq4:
   #   build:

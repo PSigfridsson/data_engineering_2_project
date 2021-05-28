@@ -82,7 +82,7 @@ function topxUnitTests(x) {
     });
 }
 
-function topxLanguages(x) {
+function topxUnitTestsCi(x) {
     $.getJSON("/_topxunittestci", {'topx': x}, function(data) {
         $('#top10testcitbody').html("");
         $.each(data.top10, function(key,val) {

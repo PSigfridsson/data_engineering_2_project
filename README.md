@@ -1,5 +1,5 @@
 # Data Engineering 2 - Project 2
- Github analytic system using a streaming framework
+ Github analytic system using cloud-init, docker, flask, mongoDB and a streaming framework, Apache Pulsar. 
 ## Starting/using the analytic pipeline
 The automation of this project is made possible with docker, cloud-init and the openstackAPI. There is currently
 two proper ways to run this analytic streaming project and a manual way. Either using the start_instances.py script provided in the root folder or to provide the cloud-init file to the cloud provider when launching a VM. All three launching methods are described below.
